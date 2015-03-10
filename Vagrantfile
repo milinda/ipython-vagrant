@@ -43,13 +43,12 @@ Vagrant.configure(2) do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  # config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
-  #   vb.memory = "1024"
-  # end
+  config.vm.provider "virtualbox" do |vb|
+     # Display the VirtualBox GUI when booting the machine
+     vb.gui = false
+     # Customize the amount of memory on the VM:
+     vb.memory = "1536"
+  end
   #
   # View the documentation for the provider you are using for more
   # information on available options.
@@ -81,6 +80,13 @@ Vagrant.configure(2) do |config|
      sudo pip3 install nltk
      sudo python -m nltk.downloader all
      sudo pip3 install --user --install-option="--prefix=" -U scikit-learn
+     sudo apt-get install -y libzmq3-dev libcurl4-openssl-dev
+     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+     sudo add-apt-repository ppa:marutter/rrutter
+     sudo apt-get update
+     sudo apt-get install -y r-base r-base-dev
+     cp /vagrant/Rprofile.site /etc/R/Rprofile.site
+     sudo Rscript /vagrant/rkernel-install
      cp /vagrant/bashrc /home/vagrant/.bashrc
      cp /vagrant/pg1342.txt /home/vagrant/pg.txt
   SHELL
